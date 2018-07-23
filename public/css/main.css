@@ -1,5 +1,5 @@
 /* 1. Base */
-.body {
+html {
     background-color: #5f45bb;
     background-image: linear-gradient(to bottom right, #180cac, #d054e4);
     color: #fff;
