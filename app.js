@@ -5,6 +5,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var hbs = require('hbs');
 var index = require('./routes/index');
+var projects = require('./routes/projects');
 var app = express();
 
 // view engine setup
@@ -19,6 +20,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
+app.use('/projects', projects);
 //app.use('/users', index);
 
 // catch 404 and forward to error handler
