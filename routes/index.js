@@ -3,45 +3,59 @@ var router = express.Router();
 var myProjects = [
   {
     name: "Number Guessing Game",
+    alias: "number-guessing-game",
     image: "/images/projects/number-guessing-game.jpg",
-    description: "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.",
-    github: "https://www.github.com/mnegi",
-    detailUrl: '/projects/number-guessing-game'
+    description: "In this project you will build a small number guessing game. System will select a random number between 1 and 100. See if you can guess it in 10 turns or fewer. We'll tell you if your guess was too high or too low.",
+    githubUrl: "https://www.github.com/mnegi/number-guessing-game",
+    tags: [{name:"JavaScript",class:"primary"},{name:"JavaScript",class:"primary"},{name:"JavaScript",class:"primary"}]
   },
   {
     name: "JS Console",
-    image: "/images/projects/js-console.jpg",
-    description: "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.",
-    github: "https://www.github.com/mnegi",
-    detailUrl: '/projects/js-console'
+    alias: "js-console",
+    image: "/projects/js-console/images/js-console.jpg",
+    description: "In this project you will build a JavaScript console. In this console you will be able to run any JavaScript statements and expressions. Let's try to evaluate JavaScript expressions using your own code.",
+    githubUrl: "https://www.github.com/mnegi/js-console",
+    tags: [{name:"JavaScript",class:"primary"},{name:"JavaScript",class:"primary"},{name:"JavaScript",class:"primary"}]
   },
   {
     name: "Image Changer",
-    image: "/images/projects/image-changer.jpg",
-    description: "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.",
-    github: "https://www.github.com/mnegi",
-    detailUrl: '/projects/image-changer'
+    alias: "image-changer",
+    image: "/projects/image-changer/images/image-changer.jpg",
+    description: "This is a very simple JavaScript project which will toggle the images on click of it. In this project you will learn how to handle the events in JavaScript. Learn different ways you can attach event handlers.",
+    githubUrl: "https://www.github.com/mnegi/image-changer",
+    tags: [{name:"JavaScript",class:"primary"},{name:"JavaScript",class:"primary"},{name:"JavaScript",class:"primary"}]
   },
   {
     name: "Silly Story Generator",
-    image: "/images/projects/silly-story-generator.jpg",
-    description: "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.",
-    github: "https://www.github.com/mnegi",
-    detailUrl: '/projects/silly-story-generator'
+    alias: "silly-story-generator",
+    image: "/projects/silly-story-generator/images/silly-story-generator.jpg",
+    description: "In this project you will generates a silly story. We will have a variable username and converts the default US weight and temperature quantities and units in the story into UK equivalents and generate a random silly story.",
+    githubUrl: "https://www.github.com/mnegi/silly-story-generator",
+    tags: [{name:"JavaScript",class:"primary"},{name:"JavaScript",class:"primary"},{name:"JavaScript",class:"primary"}]
   },
   {
     name: "Image Gallery",
-    image: "/images/projects/image-gallery.jpg",
-    description: "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.",
-    github: "https://www.github.com/mnegi",
-    detailUrl: '/projects/image-gallery'
+    alias: "image-gallery",
+    image: "/projects/image-gallery/images/image-gallery.jpg",
+    description: "In this project you will learn how to create an image gallery just by using plain JavaScript. You will see a main image box and few thumbnail images at the bottom. On click of the thumbnail images it will open in the main image box.",
+    githubUrl: "https://www.github.com/mnegi/image-gallery",
+    tags: [{name:"JavaScript",class:"primary"},{name:"JavaScript",class:"primary"},{name:"JavaScript",class:"primary"}]
   },
   {
     name: "Bouncing Balls",
-    image: "/images/projects/bouncing-balls.jpg",
-    description: "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.",
-    github: "https://www.github.com/mnegi",
-    detailUrl: '/projects/bouncing-balls'
+    alias: "bouncing-balls",
+    image: "/projects/bouncing-balls/images/bouncing-balls.jpg",
+    description: "In this project we will build a bouncing balls demo, to show you how useful objects can be in JavaScript. Little balls will bounce around on the screen, and change color when they touch each other using the Canvas API.",
+    githubUrl: "https://www.github.com/mnegi/bouncing-balls",
+    tags: [{name:"JavaScript",class:"primary"},{name:"JavaScript",class:"primary"},{name:"JavaScript",class:"primary"}]
+  },
+  {
+    name: "JS Matrix Effect",
+    alias: "js-matrix-effect",
+    image: "/projects/js-matrix-effect/images/js-matrix-effect.jpg",
+    description: "In this project your will build Matrix rain animation effect using HTML5 canvas and JavaScript. Learn multiple JavaScript features that has been used to create this project including String, Math and Canvas API.",
+    githubUrl: "https://www.github.com/mnegi/js-matrix-effect",
+    tags: [{name:"JavaScript",class:"primary"},{name:"JavaScript",class:"primary"},{name:"JavaScript",class:"primary"}]
   }
 ];
 
@@ -51,37 +65,37 @@ var pMap = {
   "image-changer":2,
   "silly-story-generator":3,
   "image-gallery":4,
-  "bouncing-balls":5
+  "bouncing-balls":5,
+  "js-matrix-effect":6
 };
 
+function getProject(alias){
+  var index = parseInt(pMap[alias]);
+  return myProjects[index];
+}
+
 router.get('/', function (req, res, next) {
-  res.render('index', { title: 'Portfolio', showFooter: false });
+  res.render('index', { title: 'Portfolio', navHome: true, showFooter: false });
 });
 
 router.get('/projects', function (req, res, next) {
-  res.render('projects', { title: 'Portfolio', showFooter: true, projects: myProjects });
+  res.render('projects', { title: 'Portfolio', navProjects: true, showFooter: true, projects: myProjects });
 });
 
-router.get('/projects/:projectName', function (req, res, next) {
-  var pName = req.params.projectName;
-  var index = parseInt(pMap[pName]);
-  var projectDetail = myProjects[index];
+router.get('/projects/:projectAlias', function (req, res, next) {
   res.render('project-detail', { 
-    layout: 'layout-projects', 
     title: 'Portfolio', 
+    navProjects: true, 
     showFooter: true, 
-    project:  projectDetail
+    project:  getProject(req.params.projectAlias)
   });
 });
 
-router.get('/projects/:projectName/demo', function (req, res, next) {
-  var pName = req.params.projectName;
-  console.log(pName);
-
-  res.render('demos/'+ pName, { 
-    layout: 'layout-empty', 
+router.get('/projects/:projectAlias/demo', function (req, res, next) {
+  res.render('demos/'+ req.params.projectAlias, { 
+    layout: 'layout-demo', 
     title: 'Portfolio',
-    pName: pName
+    project: getProject(req.params.projectAlias)
   });
 });
 
