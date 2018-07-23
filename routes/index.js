@@ -4,7 +4,7 @@ var myProjects = [
   {
     name: "Number Guessing Game",
     alias: "number-guessing-game",
-    image: "/images/projects/number-guessing-game.jpg",
+    image: "/projects/number-guessing-game/images/number-guessing-game.jpg",
     description: "In this project you will build a small number guessing game. System will select a random number between 1 and 100. See if you can guess it in 10 turns or fewer. We'll tell you if your guess was too high or too low.",
     githubUrl: "https://www.github.com/mnegi/number-guessing-game",
     tags: [{name:"JavaScript",class:"primary"},{name:"JavaScript",class:"primary"},{name:"JavaScript",class:"primary"}]
