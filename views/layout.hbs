@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    {{> header }}
+  </head>
+
+  <body>
+    {{> nav }}
+
+    {{{body}}}
+    
+    {{#if showFooter}}
+        {{> footer }}
+    {{/if}}
+
+    {{> scripts }}
+  </body>
+</html>
