@@ -82,7 +82,7 @@ var data = {
     }
   ],
 
-  pMap: {
+  projectIndex: {
     "number-guessing-game":0,
     "js-console":1,
     "image-changer":2,

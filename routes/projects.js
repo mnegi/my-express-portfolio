@@ -7,7 +7,7 @@ var data = require('../seed-data');
 
 function getProject(alias){
     if(alias){
-        var index = parseInt(data.pMap[alias]);
+        var index = parseInt(data.projectIndex[alias]);
         return data.myProjects[index];
     }else{
         return data.myProjects;
