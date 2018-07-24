@@ -34,7 +34,8 @@ router.get('/:blogAlias', function (req, res, next) {
       navBlog: true, 
       showFooter: true, 
       extraCss: ['/css/blog.css'],
-      blog:  blog
+      blog:  blog,
+      categories: data.blogCategories
     });
 });
 
