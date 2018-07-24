@@ -1,34 +1,138 @@
-<form class="form-signin">
-    <div class="mb-4">
-        <h1 class="h3 mb-3 font-weight-normal">Contact Me</h1>
-    </div>
-    
-    <hr>
+<main role="main">
+    <div class="album py-3 bg-light">
+        <div class="container"> 
+            <div class="row">
+                <div class="col-md-3 project-detail-sb">
+                    {{!-- <div class="project-sidebar-block no-top-margin">
+                        <h2 class="no-top-margin">Manohar Negi</h2>
+                    </div>
+                    <hr> --}}
 
-    <div class="form-label-group">
-        <label for="inputEmail">Name</label>
-        <input type="text" id="inputName" class="form-control" placeholder="Name" autofocus required>
-    </div>
+                    <div class="project-sidebar-block no-top-margin">
+                        <img class="img-fluid" src="/images/manohar.jpg">
+                    </div>
+                    <hr>
 
-    <div class="form-label-group">
-        <label for="inputEmail">Email</label>
-        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required>
-    </div>
+                    <div class="project-sidebar-block">
+                        <h2>Social Profiles</h2>
+                        <ul class="social"> 
+                            <li>
+                                <a href="https://www.linkedin.com/in/manoharnegi/" title="LinkedIn">
+                                    <i class="fab fa-linkedin"></i>
+                                </a> 
+                            </li>
+                            <li>
+                                <a href="https://www.github.com/mnegi" title="Github">
+                                    <i class="fab fa-github-square"></i>
+                                </a> 
+                            </li>
+                            <li>
+                                <a href="https://twitter.com/@manoharsn" title="Twitter">
+                                    <i class="fab fa-twitter-square"></i>
+                                </a> 
+                            </li>
+                            <li> 
+                                <a href="https://www.facebook.com/manohar.negi.71" title="Facebook">
+                                    <i class="fab fa-facebook"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://manoharnegi.com">
+                                    <i class="fab fa-globe"></i>
+                                </a> 
+                            </li>
+                        </ul>
+                    </div>
+                    <hr>
+                    <div class="project-sidebar-block">
+                        <h2>About This Project</h2>
+                        <ul class="social">
+                            <li>
+                                <a href="#" title="Node.js">
+                                    <i class="fab fa-node-js"></i>
+                                </a> 
+                            </li>
+                            <li>
+                                <a href="#" title="JavaScript">
+                                    <i class="fab fa-js-square"></i>
+                                </a> 
+                            </li>
+                            <li> 
+                                <a href="#" title="HTML5">
+                                    <i class="fab fa-html5"></i>
+                                </a>
+                            </li> 
+                            <li>
+                                <a href="#" title="CSS3">
+                                    <i class="fab fa-css3"></i>
+                                </a> 
+                            </li>
+                            <li>
+                                <a href="#" title="Linux">
+                                    <i class="fab fa-linux"></i>
+                                </a> 
+                            </li>
+                        </ul>
+                    </div>
+                    <hr>
 
-    <div class="form-label-group">
-        <label for="inputMobile">Mobile</label>
-        <input type="number" id="inputMobile" class="form-control" placeholder="Mobile" required>
-    </div>
+                    <div class="project-sidebar-block">
+                        <h2>Resources</h2>
+                        <div class="project-sidebar-links">
+                            {{#each project.relatedProjects}}
+                                <div class="project-sidebar-links">
+                                    <a href="/projects/{{link}}" class="bc-item">{{name}}</a>
+                                </div>
+                            {{/each}}
+                        </div>
+                    </div>
+                </div>
 
-    <div class="form-label-group">
-        <br>
-        <textarea name="description" id="description" rows="5" class="form-control" placeholder="Description"></textarea>
+                <div class="col-md-9">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item bc-item"><a href="/">Home</a></li>
+                            <li class="breadcrumb-item" aria-current="page">Contact</li>
+                        </ol>
+                    </nav>
+                    <div class="project-sidebar-block">
+                        <form class="form-signin">
+                            <div class="mb-4">
+                                <h1 class="h3 mb-3 font-weight-normal">Contact Me</h1>
+                            </div>
+                            <hr>
+                            <br>
+
+                            <div class="form-label-group">
+                                <label for="inputEmail">Name</label>
+                                <input type="text" id="inputName" class="form-control" placeholder="Name" autofocus required>
+                            </div>
+
+                            <div class="form-label-group">
+                                <label for="inputEmail">Email</label>
+                                <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required>
+                            </div>
+
+                            <div class="form-label-group">
+                                <label for="inputMobile">Mobile</label>
+                                <input type="number" id="inputMobile" class="form-control" placeholder="Mobile" required>
+                            </div>
+
+                            <div class="form-label-group">
+                                <br>
+                                <textarea name="description" id="description" rows="5" class="form-control" placeholder="Description"></textarea>
+                                </div>
+                                
+                            <div class="form-label-group">
+                                <br>
+                                <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    
+                </div>
+            </div>
         </div>
-        
-    <div class="form-label-group">
-        <br>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
     </div>
-</form>
-
-<hr>
+</main>

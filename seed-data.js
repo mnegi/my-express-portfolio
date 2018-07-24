@@ -91,6 +91,91 @@ var data = {
     "bouncing-balls":5,
     "matrix-effect":6,
     "top-5-searches":7
+  },
+
+  blogCategories: ["HTML","CSS","JavaScript","Node.js","Express","MongoDB","REST API","Angular","Bootsrap"],
+
+  myBlog: [
+    {
+      name: "Building a static portfolio site using Bootstrap 4",
+      alias: "building-a-static-portfolio-site-using-bootstrap-4",
+      image: "/images/blog/building-a-static-portfolio-site-using-bootstrap-4.jpg",
+      description: "In this project you will build a small number guessing game. System will select a random number between 1 and 100. See if you can guess it in 10 turns or fewer. We'll tell you if your guess was too high or too low.",
+      githubUrl: "https://www.github.com/mnegi/number-guessing-game",
+      tag: {name:"Bootstrap",class:"primary"},
+      imageSliders: ['slide1.png','slide2.png','slide3.png','slide4.png'],
+      relatedBlogs: [{name:'JS Console', link: 'js-console'},{name:'Image Gallery', link: 'image-gallery'}, {name:'Bouncing Balls', link: 'bouncing-balls'}, {name:'Matrix Effect', link: 'matrix-effect'}]
+    },
+    {
+      name: "Rewrite the static site using Node, Express & Handlebars",
+      alias: "rewrite-the-static-site-using-node-express-handlebars",
+      image: "/images/blog/rewrite-the-static-site-using-node-express-handlebars.jpg",
+      description: "In this project you will build a small number guessing game. System will select a random number between 1 and 100. See if you can guess it in 10 turns or fewer. We'll tell you if your guess was too high or too low.",
+      githubUrl: "https://www.github.com/mnegi/number-guessing-game",
+      tag: {name:"Express",class:"danger"},
+      imageSliders: ['slide1.png','slide2.png','slide3.png','slide4.png'],
+      relatedBlogs: [{name:'JS Console', link: 'js-console'},{name:'Image Gallery', link: 'image-gallery'}, {name:'Bouncing Balls', link: 'bouncing-balls'}, {name:'Matrix Effect', link: 'matrix-effect'}]
+    },
+    {
+      name: "Build all the pages and layouts",
+      alias: "build-all-the-pages-and-layouts",
+      image: "/images/blog/build-all-the-pages-and-layouts.jpg",
+      description: "In this project you will build a small number guessing game. System will select a random number between 1 and 100. See if you can guess it in 10 turns or fewer. We'll tell you if your guess was too high or too low.",
+      githubUrl: "https://www.github.com/mnegi/number-guessing-game",
+      tag: {name:"Express",class:"info"},
+      imageSliders: ['slide1.png','slide2.png','slide3.png','slide4.png'],
+      relatedBlogs: [{name:'JS Console', link: 'js-console'},{name:'Image Gallery', link: 'image-gallery'}, {name:'Bouncing Balls', link: 'bouncing-balls'}, {name:'Matrix Effect', link: 'matrix-effect'}]
+    },
+    {
+      name: "Design the database using MongoDB",
+      alias: "design-the-database-using-mongodb",
+      image: "/images/blog/design-the-database-using-mongodb.jpg",
+      description: "In this project you will build a small number guessing game. System will select a random number between 1 and 100. See if you can guess it in 10 turns or fewer. We'll tell you if your guess was too high or too low.",
+      githubUrl: "https://www.github.com/mnegi/number-guessing-game",
+      tag: {name:"MongoDB",class:"secondary"},
+      imageSliders: ['slide1.png','slide2.png','slide3.png','slide4.png'],
+      relatedBlogs: [{name:'JS Console', link: 'js-console'},{name:'Image Gallery', link: 'image-gallery'}, {name:'Bouncing Balls', link: 'bouncing-balls'}, {name:'Matrix Effect', link: 'matrix-effect'}]
+    },
+    {
+      name: "Fetch data from MongoDB in Express",
+      alias: "fetch-data-from-mongodb-in-express",
+      image: "/images/blog/fetch-data-from-mongodb-in-express.jpg",
+      description: "In this project you will build a small number guessing game. System will select a random number between 1 and 100. See if you can guess it in 10 turns or fewer. We'll tell you if your guess was too high or too low.",
+      githubUrl: "https://www.github.com/mnegi/number-guessing-game",
+      tag: {name:"MongoDB",class:"success"},
+      imageSliders: ['slide1.png','slide2.png','slide3.png','slide4.png'],
+      relatedBlogs: [{name:'JS Console', link: 'js-console'},{name:'Image Gallery', link: 'image-gallery'}, {name:'Bouncing Balls', link: 'bouncing-balls'}, {name:'Matrix Effect', link: 'matrix-effect'}]
+    },
+    {
+      name: "Build the REST API",
+      alias: "build-the-rest-api",
+      image: "/images/blog/build-the-rest-api.jpg",
+      description: "In this project you will build a small number guessing game. System will select a random number between 1 and 100. See if you can guess it in 10 turns or fewer. We'll tell you if your guess was too high or too low.",
+      githubUrl: "https://www.github.com/mnegi/number-guessing-game",
+      tag: {name:"API",class:"warning"},
+      imageSliders: ['slide1.png','slide2.png','slide3.png','slide4.png'],
+      relatedBlogs: [{name:'JS Console', link: 'js-console'},{name:'Image Gallery', link: 'image-gallery'}, {name:'Bouncing Balls', link: 'bouncing-balls'}, {name:'Matrix Effect', link: 'matrix-effect'}]
+    },
+    {
+      name: "Integrate REST APIs with Express App",
+      alias: "integrate-rest-api-with-express-js-app",
+      image: "/images/blog/integrate-rest-api-with-express-js-app.png",
+      description: "In this project you will build a small number guessing game. System will select a random number between 1 and 100. See if you can guess it in 10 turns or fewer. We'll tell you if your guess was too high or too low.",
+      githubUrl: "https://www.github.com/mnegi/number-guessing-game",
+      tag: {name:"API",class:"success"},
+      imageSliders: ['slide1.png','slide2.png','slide3.png','slide4.png'],
+      relatedBlogs: [{name:'JS Console', link: 'js-console'},{name:'Image Gallery', link: 'image-gallery'}, {name:'Bouncing Balls', link: 'bouncing-balls'}, {name:'Matrix Effect', link: 'matrix-effect'}]
+    }
+  ],
+
+  blogIndex: {
+    "building-a-static-portfolio-site-using-bootstrap-4": 0,
+    "rewrite-the-static-site-using-node-express-handlebars": 1,
+    "build-all-the-pages-and-layouts-including-home-projects-blog-about-contact": 2,
+    "design-the-database-using-mongodb": 3,
+    "fetch-data-from-mongodb-in-express": 4,
+    "build-the-rest-api": 5,
+    "integrate-rest-api-with-express-js-app": 6
   }
 };
 

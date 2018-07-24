@@ -6,11 +6,11 @@ router.get('/', function (req, res, next) {
 });
 
 router.get('/about', function(req, res, next) {
-  res.render('about', { showFooter: true, navAbout: true });
+  res.render('about', { title: 'About', showFooter: true, navAbout: true });
 });
 
 router.get('/contact', function(req, res, next) {
-  res.render('contact', { layout:'layout-contact', showFooter: true, navContact: true });
+  res.render('contact', { title: 'Contact', showFooter: true, navContact: true });
 });
 
 router.get('/resume', function(req, res, next) {

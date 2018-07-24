@@ -2,6 +2,9 @@
 <html lang="en">
   <head>
     {{> header }}
+    {{#each extraCss}}
+      <link href="{{this}}" rel="stylesheet" type="text/css">
+    {{/each}}
   </head>
 
   <body>
@@ -14,5 +17,9 @@
     {{/if}}
 
     {{> scripts }}
+    
+    {{#each extraScripts}}
+      <script src="{{this}}"></script>
+    {{/each}}
   </body>
 </html>
