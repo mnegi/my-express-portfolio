@@ -15,7 +15,12 @@ function getProject(alias){
 }
 
 router.get('/', function (req, res, next) {
-    res.render('projects', { title: 'Projects', navProjects: true, showFooter: true, projects: getProject() });
+    res.render('projects', { 
+        title: 'Projects', 
+        navProjects: true, 
+        showFooter: true, 
+        projects: getProject() 
+    });
 });
   
 router.get('/:projectAlias', function (req, res, next) {
@@ -24,7 +29,7 @@ router.get('/:projectAlias', function (req, res, next) {
       title: project.name ,
       navProjects: true, 
       showFooter: true, 
-      project:  getProject(req.params.projectAlias)
+      project:  project
     });
 });
   

@@ -1,5 +1,5 @@
 var data = {
-    myProjects: [
+  myProjects: [
     {
       name: "Number Guessing Game",
       alias: "number-guessing-game",
@@ -69,8 +69,19 @@ var data = {
       tags: [{name:"JavaScript",class:"primary"},{name:"Canvas",class:"secondary"},{name:"String",class:"info"}],
       imageSliders: ['slide1.png','slide2.png','slide3.png'],
       relatedProjects: [{name:'JS Console', link: 'js-console'},{name:'Image Gallery', link: 'image-gallery'}, {name:'Bouncing Balls', link: 'bouncing-balls'}, {name:'Matrix Effect', link: 'matrix-effect'}]
+    },
+    {
+      name: "Top 5 Searches",
+      alias: "top-5-searches",
+      image: "/projects/top-5-searches/images/top-5-searches.png",
+      description: "In this project you will build a fake search site, with a search box. The idea is that when terms are entered in the search box, the top 5 previous search terms are displayed in the list. It always shows last 5 searches. ",
+      githubUrl: "https://www.github.com/mnegi/top-5-searches",
+      tags: [{name:"JavaScript",class:"primary"},{name:"Array",class:"secondary"},{name:"Events",class:"info"}],
+      imageSliders: ['slide1.png','slide2.png','slide3.png','slide4.png','slide5.png'],
+      relatedProjects: [{name:'JS Console', link: 'js-console'},{name:'Image Gallery', link: 'image-gallery'}, {name:'Bouncing Balls', link: 'bouncing-balls'}, {name:'Matrix Effect', link: 'matrix-effect'}]
     }
   ],
+
   pMap: {
     "number-guessing-game":0,
     "js-console":1,
@@ -78,9 +89,9 @@ var data = {
     "silly-story-generator":3,
     "image-gallery":4,
     "bouncing-balls":5,
-    "matrix-effect":6
+    "matrix-effect":6,
+    "top-5-searches":7
   }
 };
 
 module.exports = data;
-
