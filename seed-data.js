@@ -176,6 +176,11 @@ var data = {
     "fetch-data-from-mongodb-in-express": 4,
     "build-the-rest-api": 5,
     "integrate-rest-api-with-express-js-app": 6
+  },
+
+  user: {
+    'email': 'mnegi@abc.com',
+    'password': 'supersecret'
   }
 };
 

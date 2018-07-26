@@ -9,6 +9,8 @@ var projects = require('./routes/projects');
 var blog = require('./routes/blog');
 var admin = require('./routes/admin');
 var app = express();
+var auth = require('./middleware/auth');
+var session = require('express-session');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -21,15 +23,19 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(function(req,res,next){
-  console.log('this is my middleware!!!!');
-  next();
-});
+app.use(session({
+	secret: 'top secret',
+	saveUninitialized: false,
+	resave: false,
+  cookie: { maxAge: 30 * 24 * 60 * 1000 }
+}));
+
+app.use(auth.authenticated);
 
 app.use('/', index);
 app.use('/projects', projects);
 app.use('/blog', blog);
-app.use('/admin', admin);
+app.use('/admin', auth.authenticate, admin);
 //app.use('/users', index);
 
 // catch 404 and forward to error handler

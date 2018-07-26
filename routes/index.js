@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var data = require('../seed-data');
 
 router.get('/', function (req, res, next) {
   res.render('index', { layout: 'layout-index', navHome: true });
@@ -29,7 +30,31 @@ router.get('/signin', function(req, res, next) {
   res.render('admin/signin', { layout: 'layout-signin' });
 });
 
+router.post('/signin', function(req, res, next) {
+  var email = req.body.email;
+  var password = req.body.password;
+  // authenticate the user details
+  if(email && email !== '' && password && password !== '' &&
+      email === data.user.email && password === data.user.password){
+    // create the session
+    req.session.isAuthenticated = true;
+    req.session.user = {'email': email};
+    res.locals.user = {'email': email};
+
+    res.render('admin/dashboard', { 
+      layout: 'layout-admin', 
+      title: 'Admin Dashboard',
+      navDashboard: true
+    });
+  }else{
+    var message = "Invalid email or password";
+    res.render('admin/signin', { layout: 'layout-signin', error: true, message: message});
+  }
+});
+
 router.get('/signout', function(req, res, next) {
+  req.session.isAuthenticated = false;
+  delete req.session.user;
   res.redirect('/signin'); 
 });
 module.exports = router;
