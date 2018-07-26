@@ -7,6 +7,7 @@ var hbs = require('hbs');
 var index = require('./routes/index');
 var projects = require('./routes/projects');
 var blog = require('./routes/blog');
+var admin = require('./routes/admin');
 var app = express();
 
 // view engine setup
@@ -20,16 +21,21 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(function(req,res,next){
+  console.log('this is my middleware!!!!');
+  next();
+});
+
 app.use('/', index);
 app.use('/projects', projects);
 app.use('/blog', blog);
+app.use('/admin', admin);
 //app.use('/users', index);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
+  var page = req.path;
+  res.render('404',{ title: '404', showFooter: true, path: page });
 });
 
 // error handler

@@ -1,8 +1,5 @@
 var express = require('express');
 var router = express.Router();
-var fs = require('fs');
-
-// get the seed data
 var data = require('../seed-data');
 
 function getProject(alias){

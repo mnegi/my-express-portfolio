@@ -112,7 +112,7 @@ var data = {
       image: "/images/blog/rewrite-the-static-site-using-node-express-handlebars.jpg",
       description: "In this project you will build a small number guessing game. System will select a random number between 1 and 100. See if you can guess it in 10 turns or fewer. We'll tell you if your guess was too high or too low.",
       githubUrl: "https://www.github.com/mnegi/number-guessing-game",
-      tag: {name:"Express",class:"danger"},
+      tag: {name:"Express",class:"info"},
       imageSliders: ['rewrite-the-static-site-using-node-express-handlebars.jpg'],
       relatedBlogs: [{name:'JS Console', link: 'js-console'},{name:'Image Gallery', link: 'image-gallery'}, {name:'Bouncing Balls', link: 'bouncing-balls'}, {name:'Matrix Effect', link: 'matrix-effect'}]
     },
@@ -132,7 +132,7 @@ var data = {
       image: "/images/blog/design-the-database-using-mongodb.jpg",
       description: "In this project you will build a small number guessing game. System will select a random number between 1 and 100. See if you can guess it in 10 turns or fewer. We'll tell you if your guess was too high or too low.",
       githubUrl: "https://www.github.com/mnegi/number-guessing-game",
-      tag: {name:"MongoDB",class:"secondary"},
+      tag: {name:"MongoDB",class:"success"},
       imageSliders: ['design-the-database-using-mongodb.jpg'],
       relatedBlogs: [{name:'JS Console', link: 'js-console'},{name:'Image Gallery', link: 'image-gallery'}, {name:'Bouncing Balls', link: 'bouncing-balls'}, {name:'Matrix Effect', link: 'matrix-effect'}]
     },
@@ -152,17 +152,17 @@ var data = {
       image: "/images/blog/build-the-rest-api.jpg",
       description: "In this project you will build a small number guessing game. System will select a random number between 1 and 100. See if you can guess it in 10 turns or fewer. We'll tell you if your guess was too high or too low.",
       githubUrl: "https://www.github.com/mnegi/number-guessing-game",
-      tag: {name:"API",class:"warning"},
+      tag: {name:"REST API",class:"secondary"},
       imageSliders: ['build-the-rest-api.jpg'],
       relatedBlogs: [{name:'JS Console', link: 'js-console'},{name:'Image Gallery', link: 'image-gallery'}, {name:'Bouncing Balls', link: 'bouncing-balls'}, {name:'Matrix Effect', link: 'matrix-effect'}]
     },
     {
       name: "Integrate REST APIs with Express App",
       alias: "integrate-rest-api-with-express-js-app",
-      image: "/images/blog/integrate-rest-api-with-express-js-app.png",
+      image: "/images/blog/integrate-rest-api-with-express-js-app.jpg",
       description: "In this project you will build a small number guessing game. System will select a random number between 1 and 100. See if you can guess it in 10 turns or fewer. We'll tell you if your guess was too high or too low.",
       githubUrl: "https://www.github.com/mnegi/number-guessing-game",
-      tag: {name:"API",class:"success"},
+      tag: {name:"REST API",class:"secondary"},
       imageSliders: ['integrate-rest-api-with-express-js-app.jpg'],
       relatedBlogs: [{name:'JS Console', link: 'js-console'},{name:'Image Gallery', link: 'image-gallery'}, {name:'Bouncing Balls', link: 'bouncing-balls'}, {name:'Matrix Effect', link: 'matrix-effect'}]
     }
