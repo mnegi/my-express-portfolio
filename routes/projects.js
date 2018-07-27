@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var data = require('../seed-data');
+var data = require('../mydata.json');
 
 function getProject(alias){
     if(alias){

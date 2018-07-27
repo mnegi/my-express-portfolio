@@ -1,6 +1,8 @@
 var express = require('express');
+var data = require('../mydata.json');
+var fs = require('fs');
+
 var router = express.Router();
-var data = require('../seed-data');
 
 function getProject(alias){
     if(alias){
@@ -44,13 +46,32 @@ router.get('/projects/create', function (req, res, next) {
 });
 
 router.post('/projects/create', function (req, res, next) {
+
+  var callback = function(error, data){
+    console.log(error);
+    console.log(data);
+    res.redirect('/admin/projects');
+  };
+
   var inputData = req.body;
-  console.log(JSON.stringify(inputData));
+  
   data.myProjects.push(inputData);
+  var index = Object.keys(data.projectIndex).length;
+  data.projectIndex[inputData.alias] = index;
 
+  console.log(JSON.stringify(data.myProjects));
+  var jsonData = JSON.stringify(data);
 
+  //fs.writeFile('mydata.json', jsonData, 'utf8', function());
 
-  res.redirect('/admin/projects');
+  fs.writeFile("mydata.json", jsonData, function(err) {
+    if(err) {
+        return console.log(err);
+      }
+      console.log("The file was saved!");
+      res.redirect('/admin/projects')
+  }); 
+  
   // res.render('admin/project-create', { 
   //   layout: 'layout-admin', 
   //   title: 'Projects Admin',

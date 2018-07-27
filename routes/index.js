@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var data = require('../seed-data');
+var data = require('../mydata.json');
 
 router.get('/', function (req, res, next) {
   res.render('index', { layout: 'layout-index', navHome: true });

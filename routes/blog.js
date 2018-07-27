@@ -3,7 +3,7 @@ var router = express.Router();
 var fs = require('fs');
 
 // get the seed data
-var data = require('../seed-data');
+var data = require('../mydata.json');
 
 function getBlog(alias){
     if(alias){
