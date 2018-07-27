@@ -1,7 +1,19 @@
 var express = require('express');
 var data = require('../mydata.json');
 var fs = require('fs');
+var multer = require('multer');
+var storage = multer.diskStorage({
+  destination: function (req, file, callback) {
+    callback(null, 'uploads');
+  },
+  filename: function (req, file, callback) {
+    console.log(JSON.stringify(file));
+    callback(null, Date.now() + '-' + file.originalname);
+  }
+});
+var upload = multer({ storage: storage }).single('userPhoto');
 
+// express router
 var router = express.Router();
 
 function getProject(alias){
@@ -77,6 +89,26 @@ router.post('/projects/create', function (req, res, next) {
   //   title: 'Projects Admin',
   //   navProjects: true
   // });
+});
+
+router.get('/media', function (req, res) {
+  res.render('admin/upload', { 
+    layout: 'layout-admin', 
+    title: 'Image Upload',
+    navProjects: true
+  });
+});
+
+router.post('/media', function (req, res) {
+
+  upload(req, res, function (err) {
+    console.log(err);
+
+    if (err) {
+      return res.end("Error uploading file.");
+    }
+    res.end("File is uploaded");
+  });
 });
 
 router.get('/projects/:projectAlias', function (req, res, next) {
