@@ -5,13 +5,16 @@
     <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
     {{#if error}}
         <div class="alert alert-danger" role="alert">
-            {{message}}
+            {{#each messages}}
+                {{this}}
+                <br>
+            {{/each}}
         </div>
     {{/if}}
     <label for="email" class="sr-only">Email address</label>
-    <input type="email" name="email" id="email" class="form-control" placeholder="Email address" required autofocus>
+    <input type="email" name="email" id="email" class="form-control" placeholder="Email address"  autofocus>
     <label for="password" class="sr-only">Password</label>
-    <input type="password" name="password" id="password" class="form-control" placeholder="Password" required>
+    <input type="password" name="password" id="password" class="form-control" placeholder="Password" >
     <div class="checkbox mb-3">
         <label>
             <input type="checkbox" value="remember-me"> Remember me

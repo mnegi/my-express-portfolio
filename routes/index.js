@@ -33,22 +33,36 @@ router.get('/signin', function(req, res, next) {
 router.post('/signin', function(req, res, next) {
   var email = req.body.email;
   var password = req.body.password;
-  // authenticate the user details
-  if(email && email !== '' && password && password !== '' &&
-      email === data.user.email && password === data.user.password){
-    // create the session
-    req.session.isAuthenticated = true;
-    req.session.user = {'email': email};
-    res.locals.user = {'email': email};
-
-    res.render('admin/dashboard', { 
-      layout: 'layout-admin', 
-      title: 'Admin Dashboard',
-      navDashboard: true
+  // validate inputs
+  req.checkBody('email', 'Email is required').
+      notEmpty().withMessage('Please enter a valid email');
+  req.checkBody('password', 'Password is required').notEmpty();
+  var errors = req.validationErrors();
+  if (errors) {
+    var messages = [];
+    errors.forEach(function(error) {
+        messages.push(error.msg);
+        console.log('---- '+ error.msg + ', type '+ typeof error.msg);
     });
-  }else{
-    var message = "Invalid email or password";
-    res.render('admin/signin', { layout: 'layout-signin', error: true, message: message});
+    res.render('admin/signin', {layout:'layout-signin', error: messages.length > 0,messages: messages});
+  }else{   
+    // authenticate the user details
+    if(email && email !== '' && password && password !== '' &&
+        email === data.user.email && password === data.user.password){
+      // create the session
+      req.session.isAuthenticated = true;
+      req.session.user = {'email': email};
+      res.locals.user = {'email': email};
+
+      res.render('admin/dashboard', { 
+        layout: 'layout-admin', 
+        title: 'Admin Dashboard',
+        navDashboard: true
+      });
+    }else{
+      var message = "Invalid email or password";
+      res.render('admin/signin', { layout: 'layout-signin', error: true, messages:[message] });
+    }
   }
 });
 

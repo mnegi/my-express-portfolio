@@ -11,6 +11,7 @@ var admin = require('./routes/admin');
 var app = express();
 var auth = require('./middleware/auth');
 var session = require('express-session');
+var validator = require('express-validator');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -29,7 +30,7 @@ app.use(session({
 	resave: false,
   cookie: { maxAge: 30 * 24 * 60 * 1000 }
 }));
-
+app.use(validator());
 app.use(auth.authenticated);
 
 app.use('/', index);
