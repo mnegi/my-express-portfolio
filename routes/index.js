@@ -35,14 +35,15 @@ router.post('/signin', function(req, res, next) {
   var password = req.body.password;
   // validate inputs
   req.checkBody('email', 'Email is required').
-      notEmpty().withMessage('Please enter a valid email');
+      notEmpty().withMessage('Email can not be empty').
+      isEmail().withMessage('Please enter a valid email');
   req.checkBody('password', 'Password is required').notEmpty();
   var errors = req.validationErrors();
+  console.log('---- '+ JSON.stringify(errors));
   if (errors) {
     var messages = [];
     errors.forEach(function(error) {
         messages.push(error.msg);
-        console.log('---- '+ error.msg + ', type '+ typeof error.msg);
     });
     res.render('admin/signin', {layout:'layout-signin', error: messages.length > 0,messages: messages});
   }else{   

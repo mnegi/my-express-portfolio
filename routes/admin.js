@@ -35,6 +35,29 @@ router.get('/projects', function (req, res, next) {
   });
 });
 
+router.get('/projects/create', function (req, res, next) {
+  res.render('admin/project-create', { 
+    layout: 'layout-admin', 
+    title: 'Projects Admin',
+    navProjects: true
+  });
+});
+
+router.post('/projects/create', function (req, res, next) {
+  var inputData = req.body;
+  console.log(JSON.stringify(inputData));
+  data.myProjects.push(inputData);
+
+
+
+  res.redirect('/admin/projects');
+  // res.render('admin/project-create', { 
+  //   layout: 'layout-admin', 
+  //   title: 'Projects Admin',
+  //   navProjects: true
+  // });
+});
+
 router.get('/projects/:projectAlias', function (req, res, next) {
   var project = getProject(req.params.projectAlias);
   res.render('admin/project-detail', { 
