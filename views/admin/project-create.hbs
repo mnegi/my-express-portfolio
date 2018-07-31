@@ -14,7 +14,7 @@
             </div>
         </div> --}}
     </div>
-    <form action="/admin/projects/create" method="POST">
+    <form action="/admin/projects/create" method="POST"  enctype="multipart/form-data">
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
@@ -39,15 +39,31 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="tags">Tags</label>
-                    <input type="text" class="form-control" name="githubUrl" id="githubUrl" placeholder="Github Link">
+                    <input type="text" class="form-control" name="tags" id="tags" placeholder="Tags">
                 </div>
             </div>
         </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="coverImage">Cover Image</label>
+                    <input type="file" name="coverPhoto" />
+                </div>
+            </div>
+            {{!-- <div class="col-md-6">
+                <div class="form-group">
+                    <label for="tags">Tags</label>
+                    <input type="text" class="form-control" name="githubUrl" id="githubUrl" placeholder="Github Link">
+                </div>
+            </div> --}}
+        </div>
+
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="description">Description</label>
-                    <textarea class="form-control" name="description" id="description" rows="10"></textarea>
+                    <textarea class="form-control" name="description" id="description" rows="4"></textarea>
                 </div>
             </div>
         </div>

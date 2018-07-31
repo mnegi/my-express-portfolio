@@ -4,7 +4,7 @@ var fs = require('fs');
 var multer = require('multer');
 var storage = multer.diskStorage({
   destination: function (req, file, callback) {
-    callback(null, 'uploads');
+    callback(null, '../uploads');
   },
   filename: function (req, file, callback) {
     console.log(JSON.stringify(file));
@@ -100,10 +100,7 @@ router.get('/media', function (req, res) {
 });
 
 router.post('/media', function (req, res) {
-
   upload(req, res, function (err) {
-    console.log(err);
-
     if (err) {
       return res.end("Error uploading file.");
     }
