@@ -1,24 +1,17 @@
 var express = require('express');
+var User = require('../models/userModel');
+var md5 = require('js-md5');
 var router = express.Router();
-var MongoClient = require('mongodb').MongoClient;
-// Connection URL
-var url = 'mongodb://localhost:27017';
-var db;
-// Use connect method to connect to the server
-MongoClient.connect(url, function(err, client) {
-  console.log("Connected successfully to MongoDB Server...");
-  db = client.db('portfolio');
-});
 
-function checkUser(userid, password, callback){
-  var collection = db.collection('users');
-  collection.find({'email': userid, 'password': password},{'password': 0}).toArray(function(err, docs) {
-    if(err)
-      callback(err, null);
-    else
-      callback(null, docs[0]);
-  });
-}
+// function checkUser(userid, password, callback){
+//   var collection = db.collection('users');
+//   collection.find({'email': userid, 'password': password},{'password': 0}).toArray(function(err, docs) {
+//     if(err)
+//       callback(err, null);
+//     else
+//       callback(null, docs[0]);
+//   });
+// }
 
 router.get('/', function (req, res, next) {
   res.render('index', { layout: 'layout-index', navHome: true });
@@ -49,28 +42,8 @@ router.get('/signin', function(req, res, next) {
 });
 
 router.post('/signin', function(req, res, next) {
-  function doLogin(error, data){
-    if(error){
-      // handle it
-      var message = "Invalid email or password";
-      res.render('admin/signin', { layout: 'layout-signin', error: true, messages:[message] });
-    }
-
-    console.log(JSON.stringify(data));
-
-    req.session.isAuthenticated = true;
-    req.session.user = data;
-    res.locals.user = data;
-
-    res.render('admin/dashboard', { 
-      layout: 'layout-admin', 
-      title: 'Admin Dashboard',
-      navDashboard: true
-    });
-  };
-
   var email = req.body.email;
-  var password = req.body.password;
+  var password = md5(req.body.password);
   // validate inputs
   req.checkBody('email', 'Email is required').
       notEmpty().withMessage('Email can not be empty').
@@ -85,8 +58,55 @@ router.post('/signin', function(req, res, next) {
     res.render('admin/signin', {layout:'layout-signin', error: messages.length > 0,messages: messages});
   }else{   
     // authenticate the user details
-    checkUser(email, password, doLogin);
+    User.find({'email': email, 'password': password}, function(err, user){
+      if (err){
+        res.render('admin/signin', { 
+          layout: 'layout-signin', 
+          error: true, 
+          messages:[err.msg]
+        });
+      }else if (user.length < 1){
+        res.render('admin/signin', { 
+          layout: 'layout-signin', 
+          error: true, 
+          messages:["Invalid userid or passsword"]
+        });
+      }else{
+        // you found a valid user
+        // set the session
+        console.log(JSON.stringify(user));
+        req.session.isAuthenticated = true;
+        req.session.user = user[0];
+        res.locals.user = user[0];
+        res.render('admin/dashboard', { 
+          layout: 'layout-admin', 
+          title: 'Admin Dashboard',
+          navDashboard: true
+        });
+      }
+    });
   }
+});
+
+router.get('/signup', function(req, res, next) {
+  res.render('admin/signup', { layout: 'layout-signin' });
+});
+
+router.post('/signup', function(req, res, next) {
+  // read the values from the body
+  // [ take the password and encrypt it ]
+  // use the model and save the data
+  var userModel = new User();
+  userModel.name = req.body.name;
+  userModel.email = req.body.email;
+  userModel.password = md5(req.body.password);
+  userModel.createAt = new Date();
+  userModel.save(function(err, user){
+    console.log(JSON.stringify(user));
+
+    if(err) res.send(err);
+    res.redirect('/signin');
+  });
 });
 
 router.get('/signout', function(req, res, next) {
