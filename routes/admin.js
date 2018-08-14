@@ -1,29 +1,12 @@
 var express = require('express');
 var data = require('../mydata.json');
+var path = require('path');
 var fs = require('fs');
-var multer = require('multer');
-var storage = multer.diskStorage({
-  destination: function (req, file, callback) {
-    callback(null, '../uploads');
-  },
-  filename: function (req, file, callback) {
-    console.log(JSON.stringify(file));
-    callback(null, Date.now() + '-' + file.originalname);
-  }
-});
-var upload = multer({ storage: storage }).single('userPhoto');
-
-// express router
+var projectService = require('../service/projectService');
+var mediaService = require('../service/mediaService');
 var router = express.Router();
 
-function getProject(alias){
-    if(alias){
-        var index = parseInt(data.projectIndex[alias]);
-        return data.myProjects[index];
-    }else{
-        return data.myProjects;
-    }
-}
+
 function getBlog(alias){
   if(alias){
       var index = parseInt(data.blogIndex[alias]);
@@ -41,12 +24,15 @@ router.get('/', function (req, res, next) {
 });
 
 router.get('/projects', function (req, res, next) {
-  res.render('admin/projects', { 
-    layout: 'layout-admin', 
-    title: 'Projects Admin',
-    navProjects: true,
-    projects: getProject()  
-  });
+  function listProjects(error, data){
+    res.render('admin/projects', { 
+      layout: 'layout-admin', 
+      title: 'Projects Admin',
+      navProjects: true,
+      projects: data
+    });
+  };
+  projectService.getProjects(listProjects);
 });
 
 router.get('/projects/create', function (req, res, next) {
@@ -58,73 +44,114 @@ router.get('/projects/create', function (req, res, next) {
 });
 
 router.post('/projects/create', function (req, res, next) {
-
   var callback = function(error, data){
     console.log(error);
     console.log(data);
     res.redirect('/admin/projects');
   };
-
   var inputData = req.body;
-  
-  data.myProjects.push(inputData);
-  var index = Object.keys(data.projectIndex).length;
-  data.projectIndex[inputData.alias] = index;
-
-  console.log(JSON.stringify(data.myProjects));
-  var jsonData = JSON.stringify(data);
-
-  //fs.writeFile('mydata.json', jsonData, 'utf8', function());
-
-  fs.writeFile("mydata.json", jsonData, function(err) {
-    if(err) {
-        return console.log(err);
-      }
-      console.log("The file was saved!");
-      res.redirect('/admin/projects')
-  }); 
-  
-  // res.render('admin/project-create', { 
-  //   layout: 'layout-admin', 
-  //   title: 'Projects Admin',
-  //   navProjects: true
-  // });
+  projectService.create(inputData, callback);
 });
 
-router.get('/media', function (req, res) {
+
+router.get('/projects/:projectAlias', function (req, res, next) {
+  function getProject(error, data){
+    res.render('admin/project-detail', { 
+      layout: 'layout-admin', 
+      title: data.name,
+      navProjects: true,
+      project: data
+    });
+  };
+  projectService.getProjectByAlias(req.params.projectAlias, getProject);
+});
+
+router.post('/projects/:projectAlias/update', function (req, res) {
+  var pAlias = req.params.projectAlias;
+  var callback = function(error, data){
+    console.log(error);
+    console.log(data);
+    res.redirect('/admin/projects/'+ pAlias);
+  };
+  var inputData = req.body;
+  projectService.update(req.params.projectAlias, inputData, callback);
+});
+
+router.get('/projects/:projectAlias/delete', function (req, res) {
+  var pAlias = req.params.projectAlias;
+  function deleteProject(error, data){
+    if(error){
+      // do something
+    }else{
+      res.redirect('/admin/projects')
+    }
+  }
+  projectService.delete(req.params.projectAlias, deleteProject);
+});
+
+router.get('/projects/:projectAlias/upload', function (req, res) {
+  var pAlias = req.params.projectAlias;
   res.render('admin/upload', { 
     layout: 'layout-admin', 
     title: 'Image Upload',
-    navProjects: true
-  });
-});
-
-router.post('/media', function (req, res) {
-  upload(req, res, function (err) {
-    if (err) {
-      return res.end("Error uploading file.");
-    }
-    res.end("File is uploaded");
-  });
-});
-
-router.get('/projects/:projectAlias', function (req, res, next) {
-  var project = getProject(req.params.projectAlias);
-  res.render('admin/project-detail', { 
-    layout: 'layout-admin', 
-    title: project.name,
     navProjects: true,
-    project: project
+    actionUrl: '/admin/projects/'+ pAlias+ '/upload'
   });
 });
+
+router.post('/projects/:projectAlias/upload', function (req, res, next) {
+  var pAlias = req.params.projectAlias;
+  var dir = path.join(__dirname, '../public/projects/'+ pAlias+ '/images');
+  var finishUpload = function (err, data){
+    if(err){
+      throw new Error('errro...');
+    }else{
+      res.redirect('/admin/projects/' + pAlias);
+    }
+  };
+
+  var callback = function(error, data){
+    if(error){
+      console.log(error);
+    }else{
+      projectService.update(pAlias, { image: '/projects/'+ pAlias+ '/images/' + pAlias + '.png'}, finishUpload);
+    }
+  };
+  
+  mediaService.uploadMedia(req, res, dir, pAlias + '.png', callback);
+});
+
+
+router.get('/media', function (req, res) {
+res.render('admin/upload', { 
+  layout: 'layout-admin', 
+  title: 'Image Upload',
+  navProjects: true
+});
+});
+
+// router.post('/media', function (req, res) {
+// // var dir = path.join(__dirname, '../public/projects/' 
+
+// // mediaService.upload(req, res, '')
+// // req, res, path, alias, callback
+// // upload(req, res, function (err) {
+// //   if (err) {
+// //     return res.end("Error uploading file.");
+// //   }
+// //   res.end("File is uploaded");
+// // });
+// });
+
+
 
 router.get('/blog', function (req, res, next) {
-  res.render('admin/blog', { 
-    layout: 'layout-admin', 
-    title: 'Blog Admin',
-    navBlog: true,
-    blogs: getBlog()  
-  });
+res.render('admin/blog', { 
+  layout: 'layout-admin', 
+  title: 'Blog Admin',
+  navBlog: true,
+  blogs: getBlog()  
+});
 });
 
 // router.get('/projects/:projectAlias', function (req, res, next) {
@@ -136,5 +163,6 @@ router.get('/blog', function (req, res, next) {
 //     project:  project
 //   });
 // });
+
 
 module.exports = router;

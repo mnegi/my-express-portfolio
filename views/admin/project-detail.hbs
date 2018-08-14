@@ -1,20 +1,24 @@
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">Project: {{project.name}}</h1>
-        {{!-- <div class="btn-toolbar mb-2 mb-md-0">
+        <div class="btn-toolbar mb-2 mb-md-0">
             <div class="btn-group mr-2">
-                <button class="btn btn-sm btn-outline-secondary">
+                <a href="/admin/projects/create" class="btn btn-sm btn-outline-secondary">
                     <span data-feather="plus-square"></span>
                     Create New
-                </button>
-                <button class="btn btn-sm btn-outline-secondary">
+                </a>
+                <a href="/admin/projects/{{project.alias}}/delete" class="btn btn-sm btn-outline-secondary">
+                    <span data-feather="delete"></span>
+                    Delete
+                </a>
+                <a href="/admin/projects/{{project.alias}}/upload" class="btn btn-sm btn-outline-secondary">
                     <span data-feather="upload"></span>
                     Upload
-                </button>
+                </a>
             </div>
-        </div> --}}
+        </div>
     </div>
-    <form>
+    <form action="/admin/projects/{{project.alias}}/update" method="post">
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
@@ -25,7 +29,7 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="alias">Alias</label>
-                    <input type="text" class="form-control" name="alias" id="alias" placeholder="Project alias" value="{{project.alias}}">
+                    <input type="text" class="form-control" name="alias" id="alias" placeholder="Project alias" value="{{project.alias}}" readonly>
                 </div>
             </div>
         </div>
@@ -44,10 +48,23 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-6">
                 <div class="form-group">
                     <label for="description">Description</label>
-                    <textarea class="form-control" name="description" id="description" rows="10" value="{{project.description}}">{{project.description}}</textarea>
+                    <textarea class="form-control" name="description" id="description" rows="11" value="{{project.description}}">{{project.description}}</textarea>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="description">Cover Image</label>
+                    {{#if project.image }}
+                        <img src={{project.image}} width="100%">
+                    {{else}}
+                        <a href="/admin/projects/{{project.alias}}/upload" class="btn btn-sm btn-outline-secondary">
+                            <span data-feather="upload"></span>
+                            Upload Cover Photo
+                        </a>
+                    {{/if}}
                 </div>
             </div>
         </div>

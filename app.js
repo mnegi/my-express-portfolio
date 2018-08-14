@@ -40,7 +40,8 @@ app.use(auth.authenticated);
 app.use('/', index);
 app.use('/projects', projects);
 app.use('/blog', blog);
-app.use('/admin', auth.authenticate, admin);
+//app.use('/admin', auth.authenticate, admin);
+app.use('/admin', admin);
 //app.use('/users', index);
 
 // catch 404 and forward to error handler
