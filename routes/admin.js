@@ -2,6 +2,7 @@ var express = require('express');
 var data = require('../mydata.json');
 var path = require('path');
 var fs = require('fs');
+var unzip = require('unzip');
 var projectService = require('../service/projectService');
 var mediaService = require('../service/mediaService');
 var router = express.Router();
@@ -119,6 +120,42 @@ router.post('/projects/:projectAlias/upload', function (req, res, next) {
   };
   
   mediaService.uploadMedia(req, res, dir, pAlias + '.png', callback);
+});
+
+router.get('/projects/:projectAlias/uploaddemo', function (req, res) {
+  var pAlias = req.params.projectAlias;
+  res.render('admin/upload', { 
+    layout: 'layout-admin', 
+    title: 'Upload demo project',
+    navProjects: true,
+    actionUrl: '/admin/projects/'+ pAlias+ '/uploaddemo'
+  });
+});
+
+router.post('/projects/:projectAlias/uploaddemo', function (req, res, next) {
+  var pAlias = req.params.projectAlias;
+  var dir = path.join(__dirname, '../public/demo/'+ pAlias);
+  var finishUpload = function (err, data){
+    if(err){
+      throw new Error('errro...');
+    }else{
+      // unzip the contents to the same folder
+      var zipfile = dir + '/' + pAlias + '.zip';
+      fs.createReadStream(zipfile).pipe(unzip.Extract({ path: dir }));
+      fs.unlinkSync(zipfile);
+      res.redirect('/admin/projects/' + pAlias);
+    }
+  };
+
+  // var callback = function(error, data){
+  //   if(error){
+  //     console.log(error);
+  //   }else{
+  //     projectService.update(pAlias, { image: '/projects/'+ pAlias+ '/images/' + pAlias + '.png'}, finishUpload);
+  //   }
+  // };
+  
+  mediaService.uploadMedia(req, res, dir, pAlias + '.zip', finishUpload);
 });
 
 

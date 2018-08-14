@@ -2,6 +2,7 @@ var fs = require('fs');
 var path = require('path');
 var multer = require('multer');
 
+// shell(mkdir -p path)
 function mkDirByPathSync(targetDir, { isRelativeToScript = false } = {}) {
   const sep = path.sep;
   const initDir = path.isAbsolute(targetDir) ? sep : '';

@@ -1,0 +1,35 @@
+  body{
+    margin: 0px;
+    padding: 0px;
+  }
+  .demo-top {
+    top: 0;
+    line-height: 24px;
+    font-size: 11px;
+    background: #fff;
+    background: rgba(255, 255, 255, 0.7);
+    text-transform: uppercase;
+    z-index: 9999;
+    position: relative;
+    font-family: Cambria, Georgia, serif;
+    box-shadow: 1px 0px 2px rgba(0, 0, 0, 0.2);
+  }
+
+  .demo-top a {
+    padding: 0px 10px;
+    letter-spacing: 1px;
+    color: #333;
+    display: inline-block;
+    text-decoration: none;
+  }
+
+  .demo-top span.right {
+    float: right;
+  }
+
+  .clr {
+    clear: both;
+    padding: 0;
+    height: 0;
+    margin: 0;
+  }

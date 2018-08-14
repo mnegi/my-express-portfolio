@@ -31,8 +31,8 @@ router.get('/:projectAlias/demo', function (req, res, next) {
     function renderDemo(error, project){  
         console.log(project);
         res.render('demo', { 
-            layout: 'layout-demo2', 
-            title: project.name ,
+            layout: 'layout-demo',
+            title: project.name,
             project: project
         });
     };
