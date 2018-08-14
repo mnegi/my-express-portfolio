@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Calculator Test</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" media="screen" href="css/style.css" />
+</head>
+
+<body>
+  <div class="container">
+    <p>This is a solution for the problem stated
+      <a href="http://calctest.iesim.biz/">here</a>.</p>
+    <div class="calculator">
+      <div class="calculator-display">0</div>
+      <div class="calculator-keys">
+        <button class="key-operator key-add" data-operator="add" data-args="2" title="add">+</button>
+        <button class="key-operator key-subtract" data-operator="subtract" data-args="2" title="subtract">-</button>
+        <button class="key-operator key-multiply" data-operator="multiply" data-args="2" title="multiply">&times;</button>
+        <button class="key-operator key-divide" data-operator="divide" data-args="2" title="divide">/</button>
+        <button>7</button>
+        <button>8</button>
+        <button>9</button>
+        <button class="key-operator key-power" data-operator="power" data-args="2" title="power">^</button>
+        <button>4</button>
+        <button>5</button>
+        <button>6</button>
+        <button class="key-operator" data-operator="square_root" data-args="1" title="square root">&#8730;</button>
+        <button>1</button>
+        <button>2</button>
+        <button>3</button>
+        <button class="key-operator" data-operator="log10" data-args="1" title="log10">log</button>
+        <button>0</button>
+        <button data-action="decimal">.</button>
+        <button data-action="clear">AC</button>
+        <button class="key-operator" data-operator="ln" data-args="1" title="natural log">ln</button>
+        <button class="key-operator" data-operator="pi" data-args="0" title="pi">&#960;</button>
+        <button class="key-operator" data-operator="e" data-args="0" title="e">e</button>
+        <button class="key-equal" data-action="calculate">=</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+
+</html>

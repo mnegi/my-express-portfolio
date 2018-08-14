@@ -8,7 +8,7 @@ var projectSchema = new mongoose.Schema({
     githubUrl: String,
     tags: [{name: String, class: String}],
     imageSliders: [{type: String}],
-    relatedProjects: [{type: String}],
+    relatedProjects: [{name: String, link: String}],
     createAt: {type: Date},
     updatedAt: {type: Date, default: Date.now }
 });

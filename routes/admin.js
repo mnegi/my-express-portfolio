@@ -7,7 +7,6 @@ var projectService = require('../service/projectService');
 var mediaService = require('../service/mediaService');
 var router = express.Router();
 
-
 function getBlog(alias){
   if(alias){
       var index = parseInt(data.blogIndex[alias]);
@@ -94,7 +93,7 @@ router.get('/projects/:projectAlias/upload', function (req, res) {
   var pAlias = req.params.projectAlias;
   res.render('admin/upload', { 
     layout: 'layout-admin', 
-    title: 'Image Upload',
+    title: 'Upload Cover Image',
     navProjects: true,
     actionUrl: '/admin/projects/'+ pAlias+ '/upload'
   });
@@ -102,10 +101,12 @@ router.get('/projects/:projectAlias/upload', function (req, res) {
 
 router.post('/projects/:projectAlias/upload', function (req, res, next) {
   var pAlias = req.params.projectAlias;
-  var dir = path.join(__dirname, '../public/projects/'+ pAlias+ '/images');
+  var dir = path.join(__dirname, '../public/images/projects');
   var finishUpload = function (err, data){
     if(err){
-      throw new Error('errro...');
+      //throw new Error('errro...');
+      console.log(err)
+      res.render('404');
     }else{
       res.redirect('/admin/projects/' + pAlias);
     }
@@ -115,7 +116,7 @@ router.post('/projects/:projectAlias/upload', function (req, res, next) {
     if(error){
       console.log(error);
     }else{
-      projectService.update(pAlias, { image: '/projects/'+ pAlias+ '/images/' + pAlias + '.png'}, finishUpload);
+      projectService.update(pAlias, { image: '/images/projects/'+ pAlias + '.png'}, finishUpload);
     }
   };
   
@@ -134,26 +135,20 @@ router.get('/projects/:projectAlias/uploaddemo', function (req, res) {
 
 router.post('/projects/:projectAlias/uploaddemo', function (req, res, next) {
   var pAlias = req.params.projectAlias;
-  var dir = path.join(__dirname, '../public/demo/'+ pAlias);
+  var dir = path.join(__dirname, '../public/project-demos/'+ pAlias);
   var finishUpload = function (err, data){
     if(err){
+      console.error(err)
       throw new Error('errro...');
     }else{
       // unzip the contents to the same folder
       var zipfile = dir + '/' + pAlias + '.zip';
+      // how to handle this error???
       fs.createReadStream(zipfile).pipe(unzip.Extract({ path: dir }));
       fs.unlinkSync(zipfile);
       res.redirect('/admin/projects/' + pAlias);
     }
   };
-
-  // var callback = function(error, data){
-  //   if(error){
-  //     console.log(error);
-  //   }else{
-  //     projectService.update(pAlias, { image: '/projects/'+ pAlias+ '/images/' + pAlias + '.png'}, finishUpload);
-  //   }
-  // };
   
   mediaService.uploadMedia(req, res, dir, pAlias + '.zip', finishUpload);
 });

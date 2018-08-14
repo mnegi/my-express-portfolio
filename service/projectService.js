@@ -62,10 +62,10 @@ module.exports.create = function(project, callback){
 module.exports.update = function(projectAlias, pObject, callback){
     Project.findOne({'alias': projectAlias}, function(err, project){
         if(err){
-            console.log(JSON.stringify(err));
             callback(err, null);
         }else{
-            console.log(pObject.image);
+
+            console.log(JSON.stringify(project));
             if(pObject.name){
                 project.name = pObject.name;
             }
@@ -78,7 +78,7 @@ module.exports.update = function(projectAlias, pObject, callback){
             if(pObject.githubUrl){
                 project.githubUrl = pObject.githubUrl;
             }
-            console.log(project.image);
+            
             project.save(function(err, project){
                 console.log(JSON.stringify(project));
                 if(err){

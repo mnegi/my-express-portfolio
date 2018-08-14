@@ -42,7 +42,6 @@ module.exports.uploadMedia = function (req, res, dirPath, fileName, goBack) {
   var upload = multer({ storage: storage }).single('image');
   upload(req, res, function (err, data) {
     if (err) {
-      console.log(err);
       goBack(err, null);
     } else {
       goBack(null, { 'fileName': dirPath + '' + fileName });

@@ -13,7 +13,7 @@ var auth = require('./middleware/auth');
 var session = require('express-session');
 var validator = require('express-validator');
 var mongoose = require('mongoose');
-mongoose.connect("mongodb://127.0.0.1:27017/portfolio1",function(e){
+mongoose.connect("mongodb://127.0.0.1:27017/portfolio1", { useNewUrlParser: true }, function(e){
   console.log('You are now connected to mongodb...');
 });
 
