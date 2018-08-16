@@ -6,16 +6,11 @@ var bodyParser = require('body-parser');
 var hbs = require('hbs');
 var index = require('./routes/index');
 var projects = require('./routes/projects');
-var blog = require('./routes/blog');
-var admin = require('./routes/admin');
+
 var app = express();
 var auth = require('./middleware/auth');
 var session = require('express-session');
 var validator = require('express-validator');
-var mongoose = require('mongoose');
-mongoose.connect("mongodb://127.0.0.1:27017/portfolio1", { useNewUrlParser: true }, function(e){
-  console.log('You are now connected to mongodb...');
-});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -39,8 +34,7 @@ app.use(auth.authenticated);
 
 app.use('/', index);
 app.use('/projects', projects);
-app.use('/blog', blog);
-app.use('/admin', auth.authenticate, admin);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -1,42 +1,50 @@
 var express = require('express');
 var router = express.Router();
-var projectService  = require('../service/projectService');
+var Client = require('node-rest-client').Client;
+var client = new Client();
 
 router.get('/', function (req, res, next) {
-    function listProjects(error, data){
+    client.get("http://localhost:3030/projects", function (jsonData, response) {
+        // parsed response body as js object
+        console.log(jsonData);
+        // raw response
+        // console.log(response);
         res.render('projects', { 
             title: 'Projects', 
             navProjects: true, 
             showFooter: true, 
-            projects: data
+            projects: jsonData.data
         });
-    };
-    projectService.getProjects(listProjects);
+    });
 });
   
 router.get('/:projectAlias', function (req, res, next) {
-    function getProject(error, project){  
-        console.log(project);
-        res.render('project-detail', { 
-            title: project.name ,
-            navProjects: true, 
-            showFooter: true, 
-            project:  project
+    client.get("http://localhost:3030/projects/"+ req.params.projectAlias, 
+        function (jsonData, response) {
+            // parsed response body as js object
+            console.log(jsonData);
+            // raw response
+            // console.log(response);
+
+            res.render('project-detail', { 
+                title: jsonData.data.name ,
+                navProjects: true, 
+                showFooter: true, 
+                project:  jsonData.data
+            });
         });
-    };
-    projectService.getProjectByAlias(req.params.projectAlias, getProject);
 });
   
-router.get('/:projectAlias/demo', function (req, res, next) {
-    function renderDemo(error, project){  
-        console.log(project);
-        res.render('demo', { 
-            layout: 'layout-demo',
-            title: project.name,
-            project: project
-        });
-    };
-    projectService.getProjectByAlias(req.params.projectAlias, renderDemo);
-});
+// router.get('/:projectAlias/demo', function (req, res, next) {
+//     function renderDemo(error, project){  
+//         console.log(project);
+//         res.render('demo', { 
+//             layout: 'layout-demo',
+//             title: project.name,
+//             project: project
+//         });
+//     };
+//     projectService.getProjectByAlias(req.params.projectAlias, renderDemo);
+// });
 
 module.exports = router;
