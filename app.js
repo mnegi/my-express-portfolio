@@ -6,6 +6,7 @@ var bodyParser = require('body-parser');
 var hbs = require('hbs');
 var index = require('./routes/index');
 var projects = require('./routes/projects');
+var admin = require('./routes/admin');
 
 var app = express();
 var auth = require('./middleware/auth');
@@ -34,6 +35,7 @@ app.use(auth.authenticated);
 
 app.use('/', index);
 app.use('/projects', projects);
+app.use('/admin', auth.authenticate, admin);
 
 
 // catch 404 and forward to error handler
